@@ -2,9 +2,19 @@
 1 - Docker
 2 - docker-composer
 
-## Documentação Postman da api para importar no Postman
+# Documentação Postman da api para importar no Postman
 
 - `./php-sport.postman_collection.json`
+
+# Command para pegar dados na API
+```bash
+php artisan bot:ball-dont-line {--specific=} {--cursor=}
+```
+## exemplo
+- Get Players: php artisan bot:ball-dont-line --specific=player
+- Get Teams: php artisan bot:ball-dont-line --specific=team
+- Get Games: php artisan bot:ball-dont-line --specific=game
+- Get All: php artisan bot:ball-dont-line
 
 # Automatico
 ## 1. Clone aplicação:
@@ -54,6 +64,8 @@ No arquivo .env insira o token BALLDONTLIE
 ```bash
 docker exec play-api php artisan key:generate
 ```
+## 8. Rodando testes
+- Aguarde o docker do banco subir
 
 ## 8. Rodando testes
 ```bash
@@ -81,7 +93,12 @@ docker exec play-api php artisan db:seed --class=PlayersSeeder
 docker exec play-api php artisan db:seed --class=GamesSeeder
 ```
 
-## 14. Dados para teste User
+## 14. Rode a fila
+```bash
+docker exec play-api php artisan queue:work 
+```
+
+## 15. Dados para teste User
 - Tipo: ADMIN
 - Email: mario@nintendo.com
 - Senha: mario
