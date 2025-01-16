@@ -44,6 +44,7 @@ docker exec play-api php artisan test
 echo -e "${GREEN}Teste finalizado...${NC}\n"
 
 echo -e "${BLUE}Rodando migrate...${NC}\n"
+docker exec play-api php artisan migrate:reset
 docker exec play-api php artisan migrate
 echo -e "${BLUE}Migrate finalizado...${NC}\n"
 
