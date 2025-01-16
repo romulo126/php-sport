@@ -1,0 +1,55 @@
+services:
+  app:
+    build:
+      args:
+        user: api
+        uid: 1000
+      context: ./
+      dockerfile: ./.docker/php/Dockerfile
+    image: play-api
+    container_name: play-api
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./code:/var/www
+    networks:
+      - player_test_api
+
+  db:
+    container_name: play-db
+    image: mysql:8.0
+    environment:
+      MYSQL_USER: mysql_change_me
+      MYSQL_ROOT_PASSWORD: mysql_change_me
+      MYSQL_DATABASE: mysql_change_me
+      MYSQL_PASSWORD: mysql_change_me
+    networks:
+      - player_test_api
+    ports:
+      - "3306:3306"
+
+  nginx:
+    image: nginx:alpine
+    container_name: play-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./code:/var/www
+      - ./.docker/nginx:/etc/nginx/conf.d/
+    networks:
+      - player_test_api
+
+  redis:
+    container_name: play-redis
+    image: redis:6.2-alpine
+    environment:
+      REDIS_USERNAME: redis_change_me
+      REDIS_PASSWORD: redis_change_me
+    command: redis-server --requirepass "redis_change_me" --appendonly yes
+    networks:
+      - player_test_api
+
+networks:
+  player_test_api:
+    driver: bridge
