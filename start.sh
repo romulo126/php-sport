@@ -33,7 +33,7 @@ until docker exec play-db mysqladmin ping -u root -pmysql_change_me --silent; do
 
     echo "Aguardando o banco de dados..."
 
-    sleep 2
+    sleep 5
 
 done
 
@@ -53,6 +53,10 @@ docker exec play-api php artisan db:seed --class=TeamsSeeder
 docker exec play-api php artisan db:seed --class=PlayersSeeder
 docker exec play-api php artisan db:seed --class=GamesSeeder
 echo -e "${YELLOW}Banco Populado...${NC}\n"
+
+echo -e "${BLUE}Iniciando a fila...${NC}\n"
+docker exec play-api php artisan queue:work
+echo -e "${BLUE}Fila rodando${NC}\n"
 
 echo -e "${GREEN}Dados de usuário para teste:${NC}\n"
 echo -e "####################################"
