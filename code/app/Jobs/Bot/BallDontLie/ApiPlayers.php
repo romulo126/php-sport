@@ -57,7 +57,7 @@ class ApiPlayers implements ShouldQueue
         $players = $this->ballDontLieService->getPlayers($this->cursor);
 
         foreach($players['data'] as $value) {
-            $this->repository->insrtPlayers($value['team'], $value);
+            $this->repository->insertPlayers($value['team'], $value);
         }
 
         if (isset($players['meta']['next_cursor'])) {

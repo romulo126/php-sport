@@ -22,7 +22,7 @@ class SportGamesRepository implements SportGamesRepositoryContract
         return $this->model->with(['homeTeam', 'visitorTeam'])->paginate($perPage);
     }
 
-    public function insrtGamers(array $homeTeam, array $visitorTeam, array $game): void
+    public function insertGames(array $homeTeam, array $visitorTeam, array $game): void
     {
         $homeTeam = $this->model->findOrCreateTeam($homeTeam['id'], $homeTeam);
         $visitorTeam = $this->model->findOrCreateTeam($visitorTeam['id'], $visitorTeam);

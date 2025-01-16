@@ -7,5 +7,5 @@ interface SportTeamsRepositoryContract
 {
     public function getTeams(int $perPage = 10);
 
-    public function insrtTeams(array $team): void;
+    public function insertTeams(array $team): void;
 }

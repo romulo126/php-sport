@@ -54,7 +54,7 @@ class ApiTeams implements ShouldQueue
         $team = $this->ballDontLieService->getTeams();
 
         foreach($team['data'] as $value) {
-            $this->repository->insrtTeams($value);
+            $this->repository->insertTeams($value);
         }
     }
 }
